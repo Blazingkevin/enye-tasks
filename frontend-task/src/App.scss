@@ -1,0 +1,15 @@
+@import './sass/variables';
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+.App {
+    background-color: rgba($darkestblue, .9);
+
+    h1{
+        font-family: 'Kumbh Sans', sans-serif;
+        font-size: 3rem;
+        color: rgba(white, .5);
+        margin: 0;
+        padding-top: 2rem;
+        text-align: center;
+    }
+}

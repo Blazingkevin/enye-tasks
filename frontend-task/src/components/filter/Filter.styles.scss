@@ -1,0 +1,14 @@
+@import '../../sass/variables';
+
+#filter {
+    display: block;
+    width: 20rem;
+    height: 3rem;
+    font-size: 1.2rem;
+    color: $lightblue;
+    background-color: $darkestblue ;
+    border: 999px;
+    outline: none;
+    margin-left: 1rem;
+    padding: 0 1rem;
+}

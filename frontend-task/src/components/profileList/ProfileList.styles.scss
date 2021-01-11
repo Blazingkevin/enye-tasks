@@ -1,0 +1,32 @@
+@import '../../sass/variables';
+
+.profile_list{
+    // background-color: rgba($darkestblue, .9);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .list-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .top-container{
+        width: 100%;
+        display:  flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    }
+}

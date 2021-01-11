@@ -1,0 +1,33 @@
+@import '../../sass/variables';
+
+.pagination{
+    display: block;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_list{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        &_item{
+            list-style: none;
+            display: block;;
+            background-color: $darkestblue;
+            padding: 1rem;
+            color: $red;
+            cursor: pointer;
+
+            &-active, &:hover{
+                background-color: rgba($darkestblue, .6);
+            }   
+
+            &-active{
+                transform: translateY(-2px);
+                transition: all 300ms;
+            }
+        }
+    }
+}
