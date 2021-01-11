@@ -12,3 +12,13 @@
     margin-left: 1rem;
     padding: 0 1rem;
 }
+
+@media only screen and (max-width: 480px){
+    #search {
+        width: 14.2rem;
+        height: 2.13rem;
+        font-size: 0.85rem;
+        margin-left: .0.71rem;
+        padding: 0 0.71rem;
+    }
+}

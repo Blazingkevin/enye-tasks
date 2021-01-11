@@ -137,7 +137,7 @@ export default () => {
 
 
     if (profileList.all.length == 0) {
-        return <div>loading...</div>
+        return <div className="loading">loading...</div>
     }
     else {
         return (
@@ -156,7 +156,7 @@ export default () => {
                 </div>
                 {
                     profileList.emptyResult ?
-                        <div>No result</div> :
+                        <div className="noresult">No result</div> :
                         <div className="list-wrapper">
                             <Pagination
                                 totalNumberOfItems={profileList.filteredProfiles != 0 ? profileList.filteredProfiles.length : profileList.all.length}
