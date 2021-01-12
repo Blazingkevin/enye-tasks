@@ -2,8 +2,7 @@ import React from 'react';
 import './Filter.styles.scss';
 
 export default (props) => {
-    const { filter, options } = props
-    console.log(options)
+    const { filter, options, setDefault } = props
     const handlechange = (evt) => {
         const [fieldName, value] = evt.target.value.split('-')
         filter({
@@ -12,11 +11,11 @@ export default (props) => {
         })
     }
     const paymentOptions = Array.from(options.PaymentMethod)
-        .map(item => <option value={`PaymentMethod-` + item}>{item}</option>)
+        .map((item, index) => <option key={index} value={`PaymentMethod-` + item}>{item}</option>)
     const genderOptions = Array.from(options.Gender)
-        .map(item => <option value={`Gender-` + item}>{item}</option>)
+        .map((item, index) => <option key={index} value={`Gender-` + item}>{item}</option>)
     return <select name="" id="filter" onChange={handlechange}>
-                <option value="" selected>none</option>
+                <option value="" selected={setDefault}>none</option>
                 <optgroup label="By Payment Method">
                     {paymentOptions}
                 </optgroup>

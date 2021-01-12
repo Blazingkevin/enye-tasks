@@ -1,47 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ProfileCard.styles.scss';
 
-/**
- * User Info
- * -First Name
- * -Last Name
- * -Gender
- * -email
- * -phone number
- * -username
- * -lastLogin
- * 
- * Card Detail
- * -credit card number
- * -credit card type
- * -payment method
- * 
- * Request Orgin
- * -Latitude
- * -Longitude
- * -domain name
- * -mac address
- * -url
- */
-
 export default (props) => {
-    const sampleData = {
-        "FirstName": "Malika",
-        "LastName": "Mitchell",
-        "Gender": "Prefer to skip",
-        "Latitude": -51.729115,
-        "Longitude": 45.10225,
-        "CreditCardNumber": "4916529095670595",
-        "CreditCardType": "VISA",
-        "Email": "qaSgiUt@sYtckrO.org",
-        "DomainName": "ykDVkxC.biz",
-        "PhoneNumber": "101-734-6289",
-        "MacAddress": "46:77:61:72:0d:7d",
-        "URL": "https://erLIjSE.info/",
-        "UserName": "PrDHMBW",
-        "LastLogin": "2009-08-24 07:50:00",
-        "PaymentMethod": "money order"
-    }
     const {profileData} = props;
 
     const userInfo = {
@@ -88,10 +48,10 @@ export default (props) => {
 
     const tabs = { 'source': 0, 'user': 1, 'payment': 2 }
     const [visibleTab, setVisibleTab] = useState(tabs['user']);
-
+ 
     const changeTab = (tabObject) => {
-        const li = Object.keys(tabObject).map(fieldName => {
-            return <div className="item">{fieldNames[fieldName]}: {tabObject[fieldName]}</div>
+        const li = Object.keys(tabObject).map((fieldName, index) => {
+            return <div key={index} className="item">{fieldNames[fieldName]}: {tabObject[fieldName]}</div>
         })
 
         return li

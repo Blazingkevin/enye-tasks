@@ -10,7 +10,8 @@ export default (props) => {
         pageNumbers.push(i)
     }
 
-    const paginationItems = pageNumbers.map(n => <li
+    const paginationItems = pageNumbers.map((n, index) => <li
+         key={index}
          className={`pagination_list_item ${currentPage == n ? 'pagination_list_item-active' : ''}`}
          onClick={()=>updatePage(n)}
          >{n}</li>)

@@ -7,10 +7,11 @@
     font-size: 1.2rem;
     color: $lightblue;
     background-color: $darkestblue ;
-    border: 999px;
+    border-radius: 999px;
     outline: none;
     margin-left: 1rem;
     padding: 0 1rem;
+    border-style: none;
 }
 
 
@@ -21,5 +22,6 @@
         font-size: 0.85rem;
         margin-left: .0.71rem;
         padding: 0 0.71rem;
+        border-radius: 709px;
     }
 }

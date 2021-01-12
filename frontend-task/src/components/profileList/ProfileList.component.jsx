@@ -15,20 +15,21 @@ export default () => {
         page: 1,
         filteredProfiles: [],
         filterOPtions: {},
-        emptyResult: false
+        emptyResult: false,
+        defaultSelect: true,
     })
 
     useEffect(() => {
         let mounted = true;
-        fetch('http://api.enye.tech/v1/challenge/records')
+        fetch('https://api.enye.tech/v1/challenge/records')
             .then(response => response.json())
             .then(data => {
-                updateProfileListBasedOnPage(1, data.records.profiles);
+                updateProfileList(1, data.records.profiles);
             });
         return () => mounted = false;
     }, [])
 
-    const updateProfileListBasedOnPage = (pageNumber, allProfile, filteredProfiles, clearFilter) => {
+    const updateProfileList = (pageNumber, allProfile, filteredProfiles, clearFilter, isSearch) => {
         const start = (pageNumber - 1) * 20;
         const end = start + 20;
 
@@ -49,12 +50,27 @@ export default () => {
         if (filteredProfiles) {
             // if filtered profile was passed to the function, update state accordingly set default page to 1
             const profiles = filteredProfiles.slice(0, 20);
+            if(isSearch){
+                // if it's a search operation, set the select element ot it's default option
+                setProfileList({
+                    all: profileList.all,
+                    pageProfiles: profiles,
+                    page: 1,
+                    filteredProfiles: filteredProfiles,
+                    filterOPtions: profileList.filterOPtions,
+                    defaultSelect: true
+                })
+
+                return
+            }
+
             setProfileList({
                 all: profileList.all,
                 pageProfiles: profiles,
                 page: 1,
                 filteredProfiles: filteredProfiles,
-                filterOPtions: profileList.filterOPtions
+                filterOPtions: profileList.filterOPtions,
+              
             })
 
         }
@@ -65,7 +81,7 @@ export default () => {
                 pageProfiles: profiles,
                 page: pageNumber,
                 filteredProfiles: profileList.filteredProfiles,
-                filterOPtions: profileList.filterOPtions
+                filterOPtions: profileList.filterOPtions,
             })
         }
         else if (allProfile) {
@@ -84,7 +100,7 @@ export default () => {
                 pageProfiles: profiles,
                 page: profileList.page,
                 filteredProfiles: [],
-                filterOPtions: _filterOptions
+                filterOPtions: _filterOptions,
             });
         }
         else {
@@ -94,17 +110,16 @@ export default () => {
                 pageProfiles: profiles,
                 page: pageNumber,
                 filteredProfiles: [],
-                filterOPtions: profileList.filterOPtions
+                filterOPtions: profileList.filterOPtions,
             })
         }
     }
 
     // filters the profile list based on search term or filter object
     const filter = (filter_obj, searchterm) => {
-        console.log("search term: ", searchterm)
         if (searchterm == '') {
             // if the search term is an empty string, clear the filteredList
-            updateProfileListBasedOnPage(1, null, null, true);
+            updateProfileList(1, null, null, true);
         }
         if (searchterm) {
             // if a filter option has been selected, use the objects available for that filter option
@@ -118,7 +133,7 @@ export default () => {
                 })
                 return
             }
-            updateProfileListBasedOnPage(null, null, newProfileList);
+            updateProfileList(null, null, newProfileList, null, true);
 
         }
 
@@ -131,7 +146,7 @@ export default () => {
                 return profile[fieldName] == value;
             });
 
-            updateProfileListBasedOnPage(null, null, newProfileList)
+            updateProfileList(null, null, newProfileList, null, null, true)
         }
     }
 
@@ -145,11 +160,11 @@ export default () => {
                 <div className="top-container">
                     <div className="container filter-container">
                         <p>Filter:</p>
-                        <Filter filter={filter} options={profileList.filterOPtions} />
+                        <Filter setDefault={profileList.defaultSelect} filter={filter} options={profileList.filterOPtions} />
                     </div>
                     <div className="container search-container">
                         <p>Search:</p>
-                        <Search filter={filter} />
+                        <Search  filter={filter} />
                     </div>
 
 
@@ -161,12 +176,12 @@ export default () => {
                             <Pagination
                                 totalNumberOfItems={profileList.filteredProfiles != 0 ? profileList.filteredProfiles.length : profileList.all.length}
                                 currentPage={profileList.page}
-                                updatePage={updateProfileListBasedOnPage} />
+                                updatePage={updateProfileList} />
                             {profileList.pageProfiles.map((profile, index) => <ProfileCard profileData={profile} key={index} />)}
                             <Pagination
                                 totalNumberOfItems={profileList.filteredProfiles.length != 0 ? profileList.filteredProfiles.length : profileList.all.length}
                                 currentPage={profileList.page}
-                                updatePage={updateProfileListBasedOnPage} />
+                                updatePage={updateProfileList} />
                         </div>
 
                 }
