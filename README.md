@@ -35,11 +35,11 @@ Must have - filter, search and pagination.
 
 ```
 
-Implementation -  /frontend-task directory
+Implementation -  /frontend-task directory  
 Live Demo - https://kevinuti-frontend.herokuapp.com/
 
 ### Backend task
-Bild an express API that integrates with [Exchange Rate API](https://api.exchangeratesapi.io/latest) to proxy request
+Build an express API that integrates with [Exchange Rate API](https://api.exchangeratesapi.io/latest) to proxy request
 
 Must have - Appropriate HTTP response code
 
