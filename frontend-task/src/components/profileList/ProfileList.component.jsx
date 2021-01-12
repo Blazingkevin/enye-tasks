@@ -17,6 +17,7 @@ export default () => {
         filterOPtions: {},
         emptyResult: false,
         defaultSelect: true,
+        numberOfProfiles: 0
     })
 
     useEffect(() => {
@@ -24,12 +25,12 @@ export default () => {
         fetch('https://api.enye.tech/v1/challenge/records')
             .then(response => response.json())
             .then(data => {
-                updateProfileList(1, data.records.profiles);
+                updateProfileList(1, data.records.profiles, null, null, null, data.size);
             });
         return () => mounted = false;
     }, [])
 
-    const updateProfileList = (pageNumber, allProfile, filteredProfiles, clearFilter, isSearch) => {
+    const updateProfileList = (pageNumber, allProfile, filteredProfiles, clearFilter, isSearch, size) => {
         const start = (pageNumber - 1) * 20;
         const end = start + 20;
 
@@ -41,7 +42,8 @@ export default () => {
                 pageProfiles: profiles,
                 page: pageNumber,
                 filteredProfiles: [],
-                filterOPtions: profileList.filterOPtions
+                filterOPtions: profileList.filterOPtions,
+                numberOfProfiles: profileList.numberOfProfiles
             })
             return;
         }
@@ -58,7 +60,8 @@ export default () => {
                     page: 1,
                     filteredProfiles: filteredProfiles,
                     filterOPtions: profileList.filterOPtions,
-                    defaultSelect: true
+                    defaultSelect: true,
+                    numberOfProfiles: profileList.numberOfProfiles
                 })
 
                 return
@@ -70,7 +73,7 @@ export default () => {
                 page: 1,
                 filteredProfiles: filteredProfiles,
                 filterOPtions: profileList.filterOPtions,
-              
+                numberOfProfiles: profileList.numberOfProfiles
             })
 
         }
@@ -82,6 +85,7 @@ export default () => {
                 page: pageNumber,
                 filteredProfiles: profileList.filteredProfiles,
                 filterOPtions: profileList.filterOPtions,
+                numberOfProfiles: profileList.numberOfProfiles
             })
         }
         else if (allProfile) {
@@ -101,6 +105,7 @@ export default () => {
                 page: profileList.page,
                 filteredProfiles: [],
                 filterOPtions: _filterOptions,
+                numberOfProfiles: size
             });
         }
         else {
@@ -111,6 +116,7 @@ export default () => {
                 page: pageNumber,
                 filteredProfiles: [],
                 filterOPtions: profileList.filterOPtions,
+                numberOfProfiles: profileList.numberOfProfiles
             })
         }
     }
@@ -161,6 +167,10 @@ export default () => {
                     <div className="container filter-container">
                         <p>Filter:</p>
                         <Filter setDefault={profileList.defaultSelect} filter={filter} options={profileList.filterOPtions} />
+                    </div>
+                    <div className="container total-container">
+                        <p>No. Of Profiles:</p>
+                        <p className="number">{profileList.numberOfProfiles}</p>   
                     </div>
                     <div className="container search-container">
                         <p>Search:</p>
